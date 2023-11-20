@@ -57,8 +57,25 @@ namespace Calculadora
         private void clickOperador(object sender, EventArgs e) {
             var boton = ((Button)sender);
             numero1 = Convert.ToDouble(txtResultado.Text);
-            operador = Convert.ToChar(boton.Tag);
-            txtResultado.Text = "0";
+            if (operador == '√') {
+                numero1 = Math.Sqrt(numero1);
+                txtResultado.Text = numero1.ToString();
+            } 
+            else if (operador == '²') {
+
+                numero1 = Math.Pow(numero1, 2);
+                txtResultado.Text = numero1.ToString();
+            }
+            else if (operador == '%')
+            {
+                txtResultado.Text = (numero1 % numero2).ToString();
+            }
+            else
+            {
+                operador = Convert.ToChar(boton.Tag);
+                txtResultado.Text = "0";
+            }
+            
         }
         
     }
