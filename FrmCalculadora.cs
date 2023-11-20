@@ -12,16 +12,16 @@ namespace Calculadora
 {
     public partial class FrmCalculadora : Form
     {
+
+        double numero1 = 0, numero2 = 0;
+        char operador;
         public FrmCalculadora()
         {
             InitializeComponent();
         }
         private void Frmcalculadora_Load(object sender, EventArgs e)
         { }
-            private void txtResultado_KeyPress(object sender, KeyPressEventArgs e){
-            e.Handled = true;
-        }
-
+           
         private void agregarNumero(object sender, EventArgs e) {
             var boton = ((Button)sender);
 
@@ -30,6 +30,36 @@ namespace Calculadora
 
             txtResultado.Text += boton.Text;
         }
-       
+
+        private void btnIgual_Click(object sender, EventArgs e)
+        {
+            numero2 = Convert.ToDouble(txtResultado.Text);
+            if (operador == '+') {
+                txtResultado.Text = (numero1 + numero2).ToString();
+                numero1 = Convert.ToDouble(txtResultado.Text);
+            }
+             else if (operador == '-') {
+                txtResultado.Text = (numero1 - numero2).ToString();
+                numero1 = Convert.ToDouble(txtResultado.Text);
+            }
+            else if (operador == '*')
+            {
+                txtResultado.Text = (numero1 * numero2).ToString();
+                numero1 = Convert.ToDouble(txtResultado.Text);
+            }
+            else if (operador == '/')
+            {
+                txtResultado.Text = (numero1 / numero2).ToString();
+                numero1 = Convert.ToDouble(txtResultado.Text);
+            }
+        }
+
+        private void clickOperador(object sender, EventArgs e) {
+            var boton = ((Button)sender);
+            numero1 = Convert.ToDouble(txtResultado.Text);
+            operador = Convert.ToChar(boton.Tag);
+            txtResultado.Text = "0";
+        }
+        
     }
 }
